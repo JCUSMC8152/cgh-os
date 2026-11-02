@@ -1,0 +1,23 @@
+{
+  "iso": "CGH-OS-0.5.1-RC1-amd64.iso",
+  "bytes": 5470879744,
+  "sha256": "f936cb585c9928954181118a0185dcc5c8dab594bd83db82ad5e520739d74a80",
+  "parts": [
+    {
+      "file": "CGH-OS-0.5.1-RC1-amd64.iso.part-000",
+      "bytes": 1887436800,
+      "sha256": "779e7a1db770b5729a9315148251ea030c866171df80aeffe2642143989840bd"
+    },
+    {
+      "file": "CGH-OS-0.5.1-RC1-amd64.iso.part-001",
+      "bytes": 1887436800,
+      "sha256": "ef6d490345b8d34638e9637e36e34fb6c7d5365a91b6a17910614719e961c99b"
+    },
+    {
+      "file": "CGH-OS-0.5.1-RC1-amd64.iso.part-002",
+      "bytes": 1696006144,
+      "sha256": "e459284763f49b80e6c62d63c5c34df73db4c1b2164d5e3cf8096fc5c6001316"
+    }
+  ],
+  "source_commit": "e29f9c492d1910d47fb8e3cae346162394704c2f"
+}

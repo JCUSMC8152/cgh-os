@@ -1,0 +1,218 @@
+{
+  "started": "2026-11-02T01:33:40.194954+00:00",
+  "authentication": "anonymous HTTPS; no account credential",
+  "files": [
+    {
+      "name": "CGH-OS-0.5.1-RC1-amd64.iso.part-000",
+      "bytes": 1887436800,
+      "sha256": "779e7a1db770b5729a9315148251ea030c866171df80aeffe2642143989840bd",
+      "url": "https://github.com/JCUSMC8152/cgh-os/releases/download/v0.5.1-rc1/CGH-OS-0.5.1-RC1-amd64.iso.part-000",
+      "status": "PASS anonymous complete response"
+    },
+    {
+      "name": "CGH-OS-0.5.1-RC1-amd64.iso.part-001",
+      "bytes": 1887436800,
+      "sha256": "ef6d490345b8d34638e9637e36e34fb6c7d5365a91b6a17910614719e961c99b",
+      "url": "https://github.com/JCUSMC8152/cgh-os/releases/download/v0.5.1-rc1/CGH-OS-0.5.1-RC1-amd64.iso.part-001",
+      "status": "PASS anonymous complete response"
+    },
+    {
+      "name": "CGH-OS-0.5.1-RC1-amd64.iso.part-002",
+      "bytes": 1696006144,
+      "sha256": "e459284763f49b80e6c62d63c5c34df73db4c1b2164d5e3cf8096fc5c6001316",
+      "url": "https://github.com/JCUSMC8152/cgh-os/releases/download/v0.5.1-rc1/CGH-OS-0.5.1-RC1-amd64.iso.part-002",
+      "status": "PASS anonymous complete response"
+    },
+    {
+      "name": "CGH-OS-0.5.1-RC1-Upstream-Source.tar.part-000",
+      "bytes": 1887436800,
+      "sha256": "3d16d58ab51ab6f8109c77b26e2707c90786317333c3ee467ad24440e86b4760",
+      "url": "https://github.com/JCUSMC8152/cgh-os/releases/download/v0.5.1-rc1/CGH-OS-0.5.1-RC1-Upstream-Source.tar.part-000",
+      "status": "PASS anonymous complete response"
+    },
+    {
+      "name": "CGH-OS-0.5.1-RC1-Upstream-Source.tar.part-001",
+      "bytes": 1887436800,
+      "sha256": "e95583cd0180a945e6565918e70e5d6fb58408144bca6ec1778f51c05949d3f4",
+      "url": "https://github.com/JCUSMC8152/cgh-os/releases/download/v0.5.1-rc1/CGH-OS-0.5.1-RC1-Upstream-Source.tar.part-001",
+      "status": "PASS anonymous complete response"
+    },
+    {
+      "name": "CGH-OS-0.5.1-RC1-Upstream-Source.tar.part-002",
+      "bytes": 1887436800,
+      "sha256": "9510c880e05f149ec6cccb67791178afb59da1cfcb4efd855a2ba8e36eb3560e",
+      "url": "https://github.com/JCUSMC8152/cgh-os/releases/download/v0.5.1-rc1/CGH-OS-0.5.1-RC1-Upstream-Source.tar.part-002",
+      "status": "PASS anonymous complete response"
+    },
+    {
+      "name": "CGH-OS-0.5.1-RC1-Upstream-Source.tar.part-003",
+      "bytes": 1887436800,
+      "sha256": "25931444404db87e29a6abafa6ddeae4079b92006fcd4f1657fd1141bd3d4e5d",
+      "url": "https://github.com/JCUSMC8152/cgh-os/releases/download/v0.5.1-rc1/CGH-OS-0.5.1-RC1-Upstream-Source.tar.part-003",
+      "status": "PASS anonymous complete response"
+    },
+    {
+      "name": "CGH-OS-0.5.1-RC1-Upstream-Source.tar.part-004",
+      "bytes": 1059932160,
+      "sha256": "43604a1c95ff2331c5e1ffc75d18e4fb74f6fb30caf27654a4c607d332a02470",
+      "url": "https://github.com/JCUSMC8152/cgh-os/releases/download/v0.5.1-rc1/CGH-OS-0.5.1-RC1-Upstream-Source.tar.part-004",
+      "status": "PASS anonymous complete response"
+    },
+    {
+      "name": "ARTIFACTS.json",
+      "bytes": 1796,
+      "sha256": "6893b8aa5f48c04199da564a3a52b761b3bfc8a82c2f01cf74a7d8ef69a6e66c",
+      "url": "https://github.com/JCUSMC8152/cgh-os/releases/download/v0.5.1-rc1/ARTIFACTS.json",
+      "status": "PASS anonymous complete response"
+    },
+    {
+      "name": "CGH-CODE-LICENSE.txt",
+      "bytes": 1082,
+      "sha256": "8884342afaed55514e603ef3ac8dc5132f9d1965bde5942f25f616d53d1f503d",
+      "url": "https://github.com/JCUSMC8152/cgh-os/releases/download/v0.5.1-rc1/CGH-CODE-LICENSE.txt",
+      "status": "PASS anonymous complete response"
+    },
+    {
+      "name": "CGH-OS-0.5.1-RC1-Public-Source.tar.xz",
+      "bytes": 1445100,
+      "sha256": "4369c0b3848b5d88e4c81782c3a2ddad6e95d9ba3aabf65cee4a140844259ab7",
+      "url": "https://github.com/JCUSMC8152/cgh-os/releases/download/v0.5.1-rc1/CGH-OS-0.5.1-RC1-Public-Source.tar.xz",
+      "status": "PASS anonymous complete response"
+    },
+    {
+      "name": "CGH-OS-Release-Key.asc",
+      "bytes": 457,
+      "sha256": "75297fb8bb63df78b546c57094dab4c12cfa7e198aafb07445bc1c9a5aca371e",
+      "url": "https://github.com/JCUSMC8152/cgh-os/releases/download/v0.5.1-rc1/CGH-OS-Release-Key.asc",
+      "status": "PASS anonymous complete response"
+    },
+    {
+      "name": "INSTALL-AND-RECOVERY.md",
+      "bytes": 6769,
+      "sha256": "2aae3e0d26a4e12429dd1c9bf55e48e401351940ea9c46529e8bc59d17db52dc",
+      "url": "https://github.com/JCUSMC8152/cgh-os/releases/download/v0.5.1-rc1/INSTALL-AND-RECOVERY.md",
+      "status": "PASS anonymous complete response"
+    },
+    {
+      "name": "ISO-IDENTITY.json",
+      "bytes": 776,
+      "sha256": "06ad8d973bd99c6551eb37fec75ec4d0d0d588a8cf1f154033b71dc3e2cf3925",
+      "url": "https://github.com/JCUSMC8152/cgh-os/releases/download/v0.5.1-rc1/ISO-IDENTITY.json",
+      "status": "PASS anonymous complete response"
+    },
+    {
+      "name": "LICENSE-NOTICES.tar.gz",
+      "bytes": 14783848,
+      "sha256": "6e640886ca303a7642d8b0dafb67e1dc5912d4f21680c1aa6fe7ca643da6288a",
+      "url": "https://github.com/JCUSMC8152/cgh-os/releases/download/v0.5.1-rc1/LICENSE-NOTICES.tar.gz",
+      "status": "PASS anonymous complete response"
+    },
+    {
+      "name": "PACKAGES.tsv",
+      "bytes": 172336,
+      "sha256": "f33608ba7bbc23d2bc024299b7c5cbc0b4d7842471f0e16beb608f9361401481",
+      "url": "https://github.com/JCUSMC8152/cgh-os/releases/download/v0.5.1-rc1/PACKAGES.tsv",
+      "status": "PASS anonymous complete response"
+    },
+    {
+      "name": "RECOVERY-ACCEPTANCE.json",
+      "bytes": 1215,
+      "sha256": "97bf070a27109fa50c3100d3f0612f8b94e679d06e2b62e17d056c2bc9c11d5d",
+      "url": "https://github.com/JCUSMC8152/cgh-os/releases/download/v0.5.1-rc1/RECOVERY-ACCEPTANCE.json",
+      "status": "PASS anonymous complete response"
+    },
+    {
+      "name": "RELEASE-NOTES.md",
+      "bytes": 5369,
+      "sha256": "48f98c8c504e8553bd8c4c718c7b4bf47cad43ddfb042e6e119df5e69ba58523",
+      "url": "https://github.com/JCUSMC8152/cgh-os/releases/download/v0.5.1-rc1/RELEASE-NOTES.md",
+      "status": "PASS anonymous complete response"
+    },
+    {
+      "name": "SBOM.json",
+      "bytes": 1251077,
+      "sha256": "58c915d9478dfcac8015fcc3246bc1ebc1f29fc13f07c7ee85268c168f540ab1",
+      "url": "https://github.com/JCUSMC8152/cgh-os/releases/download/v0.5.1-rc1/SBOM.json",
+      "status": "PASS anonymous complete response"
+    },
+    {
+      "name": "SHA256SUMS",
+      "bytes": 2375,
+      "sha256": "40158ef8f82de2ba15e65d31eefb3261401d835944f59b4c22e5ee09b5a23ade",
+      "url": "https://github.com/JCUSMC8152/cgh-os/releases/download/v0.5.1-rc1/SHA256SUMS",
+      "status": "PASS anonymous complete response"
+    },
+    {
+      "name": "SHA256SUMS.asc",
+      "bytes": 228,
+      "sha256": "f7d12cb37c850e0becab3a44a238ad4c5c77c1b3aa3c08f67f59868fe4378eb2",
+      "url": "https://github.com/JCUSMC8152/cgh-os/releases/download/v0.5.1-rc1/SHA256SUMS.asc",
+      "status": "PASS anonymous complete response"
+    },
+    {
+      "name": "SIGNING-KEY-FINGERPRINT.txt",
+      "bytes": 41,
+      "sha256": "fd464672e1016a97e0dd4b8ba123339783b13724e51d3477d99ce4e94e456195",
+      "url": "https://github.com/JCUSMC8152/cgh-os/releases/download/v0.5.1-rc1/SIGNING-KEY-FINGERPRINT.txt",
+      "status": "PASS anonymous complete response"
+    },
+    {
+      "name": "SOURCE-IDENTITY.json",
+      "bytes": 390,
+      "sha256": "a1c30694583181f24e8c78b2b7e6f10830939ebf3b0d89436efa3115967cc372",
+      "url": "https://github.com/JCUSMC8152/cgh-os/releases/download/v0.5.1-rc1/SOURCE-IDENTITY.json",
+      "status": "PASS anonymous complete response"
+    },
+    {
+      "name": "UPSTREAM-SOURCE-CATALOG.json",
+      "bytes": 2350844,
+      "sha256": "f761039ee7cbfa4d91a1af006ab95f1fe1aaaf2905af2e6ef45abb433a3739d8",
+      "url": "https://github.com/JCUSMC8152/cgh-os/releases/download/v0.5.1-rc1/UPSTREAM-SOURCE-CATALOG.json",
+      "status": "PASS anonymous complete response"
+    },
+    {
+      "name": "verify-release.py",
+      "bytes": 3420,
+      "sha256": "fc3b82810e97772555f3d3353631ed003e000a0d369f2ef60a4e8bed121e7081",
+      "url": "https://github.com/JCUSMC8152/cgh-os/releases/download/v0.5.1-rc1/verify-release.py",
+      "status": "PASS anonymous complete response"
+    }
+  ],
+  "phase": "PASS",
+  "release_url": "https://github.com/JCUSMC8152/cgh-os/releases/tag/v0.5.1-rc1",
+  "release_id": 430958740,
+  "prerelease": true,
+  "published_at": "2026-11-02T01:33:06Z",
+  "signature": "PASS: independently downloaded public key and signature",
+  "fingerprint": "E634449D990AB9B041DD66469FD257669811E41F",
+  "altered_manifest_rejected": true,
+  "expected_assets": 25,
+  "actual_assets": 25,
+  "exact_asset_set": "PASS",
+  "current_asset": "verify-release.py",
+  "bytes_read": 3420,
+  "asset_bytes": 3420,
+  "assembled_files": [
+    {
+      "file": "CGH-OS-0.5.1-RC1-amd64.iso",
+      "bytes": 5470879744,
+      "sha256": "f936cb585c9928954181118a0185dcc5c8dab594bd83db82ad5e520739d74a80",
+      "status": "PASS full ordered concatenated public byte stream"
+    },
+    {
+      "file": "CGH-OS-0.5.1-RC1-Upstream-Source.tar",
+      "bytes": 8609679360,
+      "sha256": "52a2b3e2e831ac420242eafd7fb2ee004de7e701d735b0713a1f6c816f541960",
+      "status": "PASS full ordered concatenated public byte stream"
+    }
+  ],
+  "resume_note": "Preserved completed three-part ISO/public signature stage; independently downloaded source parts concurrently",
+  "completed": "2026-11-02T01:47:23.377746+00:00",
+  "complete_anonymous_downloads": 25,
+  "altered_artifact_checksum_rejected": true,
+  "inventory_source_license_consistency": "PASS",
+  "source_files": 6130,
+  "source_version_pairs": 1713,
+  "license_notice_members": 3456,
+  "known_hardware_limits_explicit": true
+}

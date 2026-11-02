@@ -1,17 +1,21 @@
 # CGH OS
 
-CGH OS is an independent Debian 13 derivative using GNOME, with original CGH Budget, CGH Workspace and desktop integration.
+CGH OS 0.5.1 RC1 is a Debian 13 / GNOME **evaluation prerelease**.
 
-**0.5.1 RC1 is an evaluation prerelease candidate. Release assets are being prepared; the existence of this source repository does not establish a completed binary release.** Use disposable virtual storage or a spare test drive. The installer can erase its selected drive.
+[Download the initial evaluation release](https://github.com/JCUSMC8152/cgh-os/releases/tag/v0.5.1-rc1)
 
-The current CGH source snapshot is [CGH-OS-0.5.1-RC1-Public-Source.tar.xz](source/CGH-OS-0.5.1-RC1-Public-Source.tar.xz). Its recovered source commit identity is `e29f9c492d1910d47fb8e3cae346162394704c2f`; its SHA-256 is `4369c0b3848b5d88e4c81782c3a2ddad6e95d9ba3aabf65cee4a140844259ab7`. It preserves build/customization source and excludes private diagnostic history. This public repository's commit identity is separate from the recovered source history.
+Public delivery acceptance passed on 2026-11-02T01:47:23.377746+00:00: all 25 distribution files downloaded anonymously, signed checksums and complete ISO/source hashes matched, and altered material was rejected. See [verification receipt](release/0.5.1-rc1/PUBLIC-VERIFICATION.json).
 
-Release verification key fingerprint:
+Start with [installation, reconstruction, verification and recovery instructions](release/0.5.1-rc1/INSTALL-AND-RECOVERY.md) and [release notes](release/0.5.1-rc1/RELEASE-NOTES.md). Download all three ordered ISO parts and the accompanying signed manifest from the release. Exact corresponding upstream source is supplied in five ordered parts, alongside the CGH source archive, package/SBOM inventories and license notices. GitHub's two automatic repository source archives are outside the signed 25-file distribution and do not replace the corresponding source delivery.
 
-`E634 449D 990A B9B0 41DD 6646 9FD2 5766 9811 E41F`
+ISO: 5,470,879,744 bytes; SHA-256 `f936cb585c9928954181118a0185dcc5c8dab594bd83db82ad5e520739d74a80`. CGH source identity: `e29f9c492d1910d47fb8e3cae346162394704c2f`.
 
-Verify the signed complete release checksum manifest, every downloaded part, and the reconstructed ISO before use. A source-only signature does not authenticate an ISO. Debian and third-party packages retain their individual copyrights and licenses; CGH's license does not relicense them. The complete corresponding upstream source, inventory and notices must accompany binary distribution.
+Release signing fingerprint: `E634 449D 990A B9B0 41DD 6646 9FD2 5766 9811 E41F`. Verify the fingerprint through a trusted channel before trusting the downloaded key.
 
-Current RC1 evidence covers a UEFI/virtio QEMU installed-disk boot, reboot/persistence, graphical login and core application launches. Earlier HP hardware testing is separate historical evidence. Secure Boot, encryption, dual boot, Bluetooth, suspend/wake, audible quality, external displays and printers are outside accepted RC1 scope. No broad hardware or security certification is claimed.
+Accepted scope includes the documented RC1 installed VM boot, actual reboot persistence, graphical authentication and application launches, 60 source tests, and manual synthetic data recovery to separate disposable storage. Recovery does not establish live-USB recovery boot, damaged filesystem repair, encryption recovery, bootloader repair or bare-metal rollback. Earlier HP hardware evidence belongs to an earlier candidate.
 
-Defect, source-delivery and security contact: admin@crawfordgroupholdings.com. Include version, reproduction steps and impact; omit credentials and private records. No response-time or support-duration commitment is made for RC1.
+Secure Boot, encrypted installation, dual boot, Bluetooth without a detected controller, suspend/wake, audible quality, external displays and printers remain unaccepted. Broader hardware compatibility is not established. This is not a complete security certification.
+
+Debian attribution and third-party license notices accompany the release. Public upstream source may contain security test fixtures; preserve them as source and do not execute them as installation steps.
+
+Support and security contact: admin@crawfordgroupholdings.com. No response-time or support-duration promise is made.

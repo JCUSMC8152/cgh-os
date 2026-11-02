@@ -1,0 +1,10 @@
+{
+  "source_commit": "e29f9c492d1910d47fb8e3cae346162394704c2f",
+  "archive": "CGH-OS-0.5.1-RC1-Public-Source.tar.xz",
+  "sha256": "4369c0b3848b5d88e4c81782c3a2ddad6e95d9ba3aabf65cee4a140844259ab7",
+  "bytes": 1445100,
+  "members": 852,
+  "private_diagnostics_excluded": true,
+  "old_source_archives_preserved_outside_public_staging": true,
+  "checked": "2026-11-01T18:20:28.557106-05:00"
+}

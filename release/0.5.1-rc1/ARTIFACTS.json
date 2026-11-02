@@ -1,0 +1,55 @@
+{
+  "candidate": "CGH OS 0.5.1 RC1",
+  "release_label": "Initial evaluation prerelease",
+  "source_commit": "e29f9c492d1910d47fb8e3cae346162394704c2f",
+  "release_key_fingerprint": "E634449D990AB9B041DD66469FD257669811E41F",
+  "distributed_files": [
+    "ARTIFACTS.json",
+    "CGH-CODE-LICENSE.txt",
+    "CGH-OS-0.5.1-RC1-Public-Source.tar.xz",
+    "CGH-OS-0.5.1-RC1-Upstream-Source.tar.part-000",
+    "CGH-OS-0.5.1-RC1-Upstream-Source.tar.part-001",
+    "CGH-OS-0.5.1-RC1-Upstream-Source.tar.part-002",
+    "CGH-OS-0.5.1-RC1-Upstream-Source.tar.part-003",
+    "CGH-OS-0.5.1-RC1-Upstream-Source.tar.part-004",
+    "CGH-OS-0.5.1-RC1-amd64.iso.part-000",
+    "CGH-OS-0.5.1-RC1-amd64.iso.part-001",
+    "CGH-OS-0.5.1-RC1-amd64.iso.part-002",
+    "CGH-OS-Release-Key.asc",
+    "INSTALL-AND-RECOVERY.md",
+    "ISO-IDENTITY.json",
+    "LICENSE-NOTICES.tar.gz",
+    "PACKAGES.tsv",
+    "RECOVERY-ACCEPTANCE.json",
+    "RELEASE-NOTES.md",
+    "SBOM.json",
+    "SHA256SUMS",
+    "SHA256SUMS.asc",
+    "SIGNING-KEY-FINGERPRINT.txt",
+    "SOURCE-IDENTITY.json",
+    "UPSTREAM-SOURCE-CATALOG.json",
+    "verify-release.py"
+  ],
+  "assembled_files": [
+    {
+      "file": "CGH-OS-0.5.1-RC1-amd64.iso",
+      "bytes": 5470879744,
+      "parts": [
+        "CGH-OS-0.5.1-RC1-amd64.iso.part-000",
+        "CGH-OS-0.5.1-RC1-amd64.iso.part-001",
+        "CGH-OS-0.5.1-RC1-amd64.iso.part-002"
+      ]
+    },
+    {
+      "file": "CGH-OS-0.5.1-RC1-Upstream-Source.tar",
+      "bytes": 8609679360,
+      "parts": [
+        "CGH-OS-0.5.1-RC1-Upstream-Source.tar.part-000",
+        "CGH-OS-0.5.1-RC1-Upstream-Source.tar.part-001",
+        "CGH-OS-0.5.1-RC1-Upstream-Source.tar.part-002",
+        "CGH-OS-0.5.1-RC1-Upstream-Source.tar.part-003",
+        "CGH-OS-0.5.1-RC1-Upstream-Source.tar.part-004"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,25 @@
+{
+  "candidate": "CGH OS 0.5.1 RC1",
+  "iso_sha256": "f936cb585c9928954181118a0185dcc5c8dab594bd83db82ad5e520739d74a80",
+  "status": "PASS_WITH_EXPLICIT_SCOPE",
+  "tested_at": "2026-11-02T00:39:05.573674+00:00",
+  "source_disk": "Disposable RC1 installed virtio disk, attached read-only; ext4 mounted ro,noload",
+  "destination": "Separate disposable 256 MiB virtual disk; backup archive extracted into a separate restored directory",
+  "recovery_environment": "Independent Alpine rescue VM with ext4 support; not a claimed CGH live-USB recovery boot test",
+  "checks": {
+    "source_and_restored_tree_byte_comparison": "PASS",
+    "budget_application_export_matches_saved_fixture": "PASS",
+    "workspace_application_export_matches_saved_fixture": "PASS",
+    "saved_document_content_matches": "PASS",
+    "sqlite_integrity_both_databases": "PASS",
+    "database_permissions_0600": "PASS"
+  },
+  "owner_drives_modified": false,
+  "limits": [
+    "Synthetic records only",
+    "No damaged filesystem reconstruction",
+    "No encrypted-volume recovery",
+    "No bootloader repair, reinstall, whole-system rollback or bare-metal restore accepted",
+    "CGH live-USB recovery session not independently executed"
+  ]
+}
