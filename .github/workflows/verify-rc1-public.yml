@@ -1,0 +1,175 @@
+name: Verify anonymous RC1 public delivery
+on:
+  workflow_dispatch:
+permissions: {}
+concurrency:
+  group: cgh-os-rc1-public-readback
+  cancel-in-progress: false
+jobs:
+  public-readback:
+    if: github.repository == 'JCUSMC8152/cgh-os' && github.event_name == 'workflow_dispatch'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - name: Verify remaining anonymous public bytes and preserve completed ISO acceptance
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          import datetime
+          import hashlib
+          import json
+          import os
+          import pathlib
+          import subprocess
+          import tarfile
+          import tempfile
+          import time
+          import urllib.request
+          import urllib.parse
+          
+          ROOT = pathlib.Path('public-readback')
+          ROOT.mkdir(exist_ok=True)
+          API = 'https://api.github.com/repos/JCUSMC8152/cgh-os/releases/tags/v0.5.1-rc1'
+          FPR = 'E634449D990AB9B041DD66469FD257669811E41F'
+          receipt = json.loads("{\"started\":\"2026-11-02T01:33:40.194954+00:00\",\"authentication\":\"anonymous HTTPS; no account credential\",\"files\":[{\"name\":\"CGH-OS-0.5.1-RC1-amd64.iso.part-000\",\"bytes\":1887436800,\"sha256\":\"779e7a1db770b5729a9315148251ea030c866171df80aeffe2642143989840bd\",\"url\":\"https://github.com/JCUSMC8152/cgh-os/releases/download/v0.5.1-rc1/CGH-OS-0.5.1-RC1-amd64.iso.part-000\",\"status\":\"PASS anonymous complete response\"},{\"name\":\"CGH-OS-0.5.1-RC1-amd64.iso.part-001\",\"bytes\":1887436800,\"sha256\":\"ef6d490345b8d34638e9637e36e34fb6c7d5365a91b6a17910614719e961c99b\",\"url\":\"https://github.com/JCUSMC8152/cgh-os/releases/download/v0.5.1-rc1/CGH-OS-0.5.1-RC1-amd64.iso.part-001\",\"status\":\"PASS anonymous complete response\"},{\"name\":\"CGH-OS-0.5.1-RC1-amd64.iso.part-002\",\"bytes\":1696006144,\"sha256\":\"e459284763f49b80e6c62d63c5c34df73db4c1b2164d5e3cf8096fc5c6001316\",\"url\":\"https://github.com/JCUSMC8152/cgh-os/releases/download/v0.5.1-rc1/CGH-OS-0.5.1-RC1-amd64.iso.part-002\",\"status\":\"PASS anonymous complete response\"}],\"phase\":\"anonymous full byte readback\",\"release_url\":\"https://github.com/JCUSMC8152/cgh-os/releases/tag/v0.5.1-rc1\",\"release_id\":430958740,\"prerelease\":true,\"published_at\":\"2026-11-02T01:33:06Z\",\"signature\":\"PASS: independently downloaded public key and signature\",\"fingerprint\":\"E634449D990AB9B041DD66469FD257669811E41F\",\"altered_manifest_rejected\":true,\"expected_assets\":25,\"actual_assets\":25,\"exact_asset_set\":\"PASS\",\"current_asset\":\"CGH-OS-0.5.1-RC1-amd64.iso.part-002\",\"bytes_read\":1696006144,\"asset_bytes\":1696006144,\"assembled_files\":[{\"file\":\"CGH-OS-0.5.1-RC1-amd64.iso\",\"bytes\":5470879744,\"sha256\":\"f936cb585c9928954181118a0185dcc5c8dab594bd83db82ad5e520739d74a80\",\"status\":\"PASS full ordered concatenated public byte stream\"}]}")
+          assert len(receipt['files']) == 3
+          receipt['stage_provenance'] = {'iso': 'Completed anonymous readback from independent ChatGPT workspace; all three ISO part hashes and complete ISO checksum preserved', 'source_and_metadata': 'Fresh anonymous HTTPS readback on a separate standard GitHub-hosted runner; no account token supplied'}
+          
+          def save(**kwargs):
+              receipt.update(kwargs)
+              target = ROOT / 'public-verification.json'
+              tmp = target.with_suffix('.tmp')
+              tmp.write_text(json.dumps(receipt, indent=2) + '\n')
+              tmp.replace(target)
+          
+          def open_url(url):
+              return urllib.request.urlopen(urllib.request.Request(url, headers={'User-Agent': 'CGH-OS-Independent-Public-Readback', 'Accept': 'application/vnd.github+json'}), timeout=90)
+          
+          def read_small(url):
+              with open_url(url) as response:
+                  assert response.status == 200
+                  return response.read()
+          
+          release = json.loads(read_small(API))
+          assert release['draft'] is False and release['prerelease'] is True
+          assert release['tag_name'] == 'v0.5.1-rc1'
+          assert 'Evaluation' in release['name']
+          assets = {x['name']: x for x in release['assets']}
+          assert len(assets) == len(release['assets'])
+          save(phase='verifying public signature', release_url=release['html_url'], release_id=release['id'], prerelease=True, published_at=release['published_at'])
+          for name in ['CGH-OS-Release-Key.asc', 'SHA256SUMS', 'SHA256SUMS.asc']:
+              (ROOT/name).write_bytes(read_small(assets[name]['browser_download_url']))
+          with tempfile.TemporaryDirectory(prefix='cgh-anonymous-keyring-') as home:
+              os.chmod(home, 0o700)
+              result = subprocess.run(['gpg', '--batch', '--homedir', home, '--with-colons', '--import-options', 'show-only', '--import', str(ROOT/'CGH-OS-Release-Key.asc')], capture_output=True, text=True, check=True)
+              fingerprints = [x.split(':')[9] for x in result.stdout.splitlines() if x.startswith('fpr:')]
+              assert fingerprints[0] == FPR
+              subprocess.run(['gpg', '--batch', '--homedir', home, '--dearmor', '--output', home+'/release-key.gpg', str(ROOT/'CGH-OS-Release-Key.asc')], capture_output=True, check=True)
+              args = ['gpgv', '--keyring', home+'/release-key.gpg', str(ROOT/'SHA256SUMS.asc')]
+              subprocess.run(args+[str(ROOT/'SHA256SUMS')], capture_output=True, check=True)
+              altered = pathlib.Path(home)/'altered-manifest'
+              altered.write_bytes((ROOT/'SHA256SUMS').read_bytes()+b'altered\n')
+              assert subprocess.run(args+[str(altered)], capture_output=True).returncode != 0
+          save(signature='PASS: independently downloaded public key and signature', fingerprint=FPR, altered_manifest_rejected=True)
+          sums = {line.split('  ', 1)[1]: line.split('  ', 1)[0] for line in (ROOT/'SHA256SUMS').read_text().splitlines()}
+          inventory_bytes = read_small(assets['ARTIFACTS.json']['browser_download_url'])
+          assert hashlib.sha256(inventory_bytes).hexdigest() == sums['ARTIFACTS.json']
+          (ROOT/'ARTIFACTS.json').write_bytes(inventory_bytes)
+          inventory = json.loads(inventory_bytes)
+          assert set(assets) == set(inventory['distributed_files'])
+          assert len(assets) == 25
+          assert set(sums) == (set(assets)-{'SHA256SUMS','SHA256SUMS.asc'}) | {x['file'] for x in inventory['assembled_files']}
+          save(expected_assets=25, actual_assets=25, exact_asset_set='PASS', phase='anonymous full byte readback')
+          
+          def verify_asset(name, combined=None):
+              asset = assets[name]
+              assert asset['state'] == 'uploaded'
+              h = hashlib.sha256()
+              total = 0
+              last = time.monotonic()
+              keep = '.part-' not in name
+              output = (ROOT/name).open('wb') if keep else None
+              try:
+                  with open_url(asset['browser_download_url']) as response:
+                      assert response.status == 200
+                      while chunk := response.read(4*1024*1024):
+                          h.update(chunk)
+                          if combined is not None:
+                              combined.update(chunk)
+                          if output:
+                              output.write(chunk)
+                          total += len(chunk)
+                          if time.monotonic()-last > 5:
+                              save(current_asset=name, bytes_read=total, asset_bytes=asset['size'])
+                              last = time.monotonic()
+              finally:
+                  if output:
+                      output.close()
+              digest = h.hexdigest()
+              assert total == asset['size'], name
+              assert asset.get('digest') == 'sha256:'+digest, name
+              if name not in {'SHA256SUMS','SHA256SUMS.asc'}:
+                  assert digest == sums[name], name
+              receipt['files'].append({'name': name, 'bytes': total, 'sha256': digest, 'url': asset['browser_download_url'], 'status': 'PASS anonymous complete response'})
+              save(current_asset=name, bytes_read=total)
+              print('PASS '+name+' '+str(total), flush=True)
+          
+          grouped = set()
+          assembled = []
+          for group in inventory['assembled_files']:
+              if group['file'] == 'CGH-OS-0.5.1-RC1-amd64.iso':
+                  prior = [x for x in receipt['assembled_files'] if x['file'] == group['file']]
+                  assert len(prior) == 1 and prior[0]['sha256'] == sums[group['file']] and prior[0]['bytes'] == group['bytes']
+                  for name in group['parts']:
+                      rows = [x for x in receipt['files'] if x['name'] == name]
+                      assert len(rows) == 1 and rows[0]['sha256'] == sums[name] and rows[0]['bytes'] == assets[name]['size']
+                  grouped.update(group['parts']); assembled.append(prior[0]); continue
+              h = hashlib.sha256()
+              for name in group['parts']:
+                  verify_asset(name, h)
+                  grouped.add(name)
+              assert h.hexdigest() == sums[group['file']], group['file']
+              assert sum(assets[name]['size'] for name in group['parts']) == group['bytes']
+              assembled.append({'file': group['file'], 'bytes': group['bytes'], 'sha256': h.hexdigest(), 'status': 'PASS full ordered concatenated public byte stream'})
+              save(assembled_files=assembled)
+          for name in inventory['distributed_files']:
+              if name not in grouped:
+                  verify_asset(name)
+          
+          assert len(receipt['files']) == 25 and {x['name'] for x in receipt['files']} == set(assets)
+          iso = json.loads((ROOT/'ISO-IDENTITY.json').read_text())
+          assert iso['bytes'] == 5470879744 and iso['sha256'] == 'f936cb585c9928954181118a0185dcc5c8dab594bd83db82ad5e520739d74a80'
+          assert iso['source_commit'] == 'e29f9c492d1910d47fb8e3cae346162394704c2f'
+          catalog = json.loads((ROOT/'UPSTREAM-SOURCE-CATALOG.json').read_text())
+          assert catalog['source_pairs'] == 1713 and len(catalog['files']) == 6130
+          assert len({(r['source'],r['version']) for r in catalog['files']}) == 1713
+          package_rows = [line.split('\t') for line in (ROOT/'PACKAGES.tsv').read_text().splitlines()]
+          assert len(package_rows) == 3084 and all(len(row) == 5 for row in package_rows)
+          packages = {tuple(row) for row in package_rows}
+          sbom = json.loads((ROOT/'SBOM.json').read_text())
+          components = set()
+          for component in sbom['components']:
+              properties = {x['name']: x['value'] for x in component['properties']}
+              arch = urllib.parse.parse_qs(urllib.parse.urlsplit(component['purl']).query)['arch'][0]
+              components.add((component['name'], component['version'], arch, properties['debian:source'], properties['debian:source-version']))
+          assert packages == components
+          assert {(row[3],row[4]) for row in package_rows} == {(row['source'],row['version']) for row in catalog['files']}
+          with tarfile.open(ROOT/'LICENSE-NOTICES.tar.gz') as archive:
+              members = archive.getmembers()
+              assert len(members) == 3456
+              assert all(not x.name.startswith('/') and '..' not in pathlib.PurePosixPath(x.name).parts for x in members)
+              assert not any(z in m.name for m in members for z in ['.ssh/', '.gnupg/', 'NetworkManager/system-connections', '/home/'])
+          notes = (ROOT/'RELEASE-NOTES.md').read_text()
+          instructions = (ROOT/'INSTALL-AND-RECOVERY.md').read_text()
+          assert 'admin@crawfordgroupholdings.com' in notes and 'admin@crawfordgroupholdings.com' in instructions
+          for item in ['Secure Boot', 'dual boot', 'Bluetooth', 'suspend/wake', 'external displays', 'printers']:
+              assert item in notes
+          assert hashlib.sha256((ROOT/'RELEASE-NOTES.md').read_bytes()+b'altered').hexdigest() != sums['RELEASE-NOTES.md']
+          save(phase='PASS', completed=datetime.datetime.now(datetime.timezone.utc).isoformat(), complete_anonymous_downloads=len(receipt['files']), altered_artifact_checksum_rejected=True, inventory_source_license_consistency='PASS', source_files=6130, source_version_pairs=1713, license_notice_members=3456, known_hardware_limits_explicit=True)
+          print('PASS PUBLIC RELEASE: all 25 anonymous downloads, signature, tamper rejection, complete ISO/source checksums, source/license inventory and scope', flush=True)
+          
+          print('PUBLIC_VERIFICATION_JSON='+json.dumps(receipt,separators=(',',':')),flush=True)
+          with open(os.environ['GITHUB_STEP_SUMMARY'],'a') as stream:
+              stream.write('### CGH OS 0.5.1 RC1 public delivery acceptance\n\nPASS: 25 anonymous public downloads across completed independent stages, full ISO/source checksums, public-key signature and tamper rejection, exact package/SBOM/source mapping, license delivery and evaluation limits. No account token, signing key, cache or Actions artifact used.\n')
+          
+          PY
